@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas 00</title>
+
+	<style>
+		body
+		{
+			background-color: #000000;
+			text-align: center;
+		}
+
+		canvas
+		{
+			background-color: #FFFFFF;
+		}
+	</style>
+
+	<script>
+		function init()
+		{
+			var context =  document.getElementById( "canvas" ).getContext( "2d" );
+
+			context.beginPath();
+			context.arc( 400, 250, 10, 0, Math.PI * 2, false );
+			context.fillStyle = "#FF0000";
+			context.fill();
+		}
+	</script>
+</head>
+
+<body onload="init();">
+
+<canvas id="canvas" width="800" height="500">
+	Please upgrade to a modern browser that supports HTML5.
+</canvas>
+
+</body>
+</html>

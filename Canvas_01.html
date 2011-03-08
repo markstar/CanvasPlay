@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas 01</title>
+
+	<style>
+		body
+		{
+			background-color: #000000;
+			text-align: center;
+		}
+
+		canvas
+		{
+			background-color: #EEEEEE;
+		}
+	</style>
+
+	<script src="js/CanvasController.js" type="text/javascript"></script>
+	<script src="js/DisplayObject.js" type="text/javascript"></script>
+	<script src="js/DisplayContainer.js" type="text/javascript"></script>
+	<script src="js/Shape.js" type="text/javascript"></script>
+	<script src="js/Circle.js" type="text/javascript"></script>
+
+	<script>
+		var canvasController = null;
+
+		function init()
+		{
+			canvasController = new CanvasController( document.getElementById( "canvas" ) );
+
+			for( var i=0;i<2400; i++)
+			{
+				circle = getCircle();
+
+				circle.x = Math.sin( i ) * i/16 + 400;
+				circle.y = Math.cos( i/10 ) * i/10 + 250;
+				circle.alpha = 1 - ( i / 2400 );
+
+				canvasController.addChild( circle );
+			}
+
+			canvasController.update();
+		}
+
+		function getCircle()
+		{
+			var circle = new DisplayContainer();
+
+			var child = new Circle();
+			child.radius = 1;
+			child.color = "#78ACEC";
+			circle.addChild( child );
+
+			var child = new Circle();
+			child.radius = 4;
+			child.alpha = 0.2;
+			child.color = "#78ACEC";
+			circle.addChild( child );
+
+			return circle;
+		}
+
+	</script>
+</head>
+
+<body onload="init();">
+
+<canvas id="canvas" width="800" height="500">
+	Please upgrade to a modern browser that supports HTML5.
+</canvas>
+
+</body>
+</html>
