@@ -10,7 +10,7 @@ Ticker = function()
 }
 
 Ticker._listeners = [];
-Ticker.interval = 20;
+Ticker.interval = 1000/30;
 Ticker.intervalID = null;
 
 Ticker.add = function( listener )
