@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Canvas 03</title>
+	<title>Canvas 04</title>
 
 	<style>
 		html, body
@@ -21,6 +21,7 @@
 	<script src="js/DisplayContainer.js" type="text/javascript"></script>
 	<script src="js/Shape.js" type="text/javascript"></script>
 	<script src="js/Circle.js" type="text/javascript"></script>
+	<script src="js/Rectangle.js" type="text/javascript"></script>
 	<script src="js/Orb.js" type="text/javascript"></script>
 	<script src="js/Ticker.js" type="text/javascript"></script>
 	<script src="js/ColorPool.js" type="text/javascript"></script>
@@ -39,6 +40,12 @@
 			canvasController = new CanvasController( document.getElementById( "canvas" ) );
 
 			objectPool.requestAll();
+
+			var rectangle = new Rectangle();
+			rectangle.width = 800;
+			rectangle.height = 500;
+			rectangle.alpha = 0.05;
+			canvasController.addChild( rectangle );
 
 			canvasController.capture = true;
 			canvasController.update();
@@ -61,8 +68,8 @@
 		{
 			for( var i = 0; i < orbs.length; i++ )
 			{
-				orbs[i].x += (Math.random() * 4) - 2;
-				orbs[i].y += (Math.random() * 4) - 2;
+				orbs[i].x += ( Math.random() * 4 ) - 2;
+				orbs[i].y += ( Math.random() * 4 ) - 2;
 			}
 
 			canvasController.update();
