@@ -4,22 +4,18 @@
 	<title>Canvas 00</title>
 
 	<style>
-		html, body
-		{
-			background-color: #000000;
-			text-align: center;
-		}
-
 		canvas
 		{
-			background-color: #FFFFFF;
+			background-color: #FFFFFF!important;
 		}
 	</style>
+
+	<link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
 
 	<script>
 		function init()
 		{
-			var context =  document.getElementById( "canvas" ).getContext( "2d" );
+			var context = document.getElementById( "canvas" ).getContext( "2d" );
 
 			context.beginPath();
 			context.arc( 400, 250, 10, 0, Math.PI * 2, false );
@@ -34,6 +30,9 @@
 <canvas id="canvas" width="800" height="500">
 	Please upgrade to a modern browser that supports HTML5.
 </canvas>
+<p>
+	<a href="http://markstar.co.uk/?p=351">View the blog post about this demo</a>
+</p>
 
 </body>
 </html>
