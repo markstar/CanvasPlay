@@ -12,12 +12,14 @@ DisplayObject = function()
 var p = DisplayObject.prototype;
 
 p.alpha = null;
+p.scale = null;
 p.x = null;
 p.y = null;
 
 p.initialise = function()
 {
 	this.alpha = 1;
+	this.scale = 1;
 	this.x = 0;
 	this.y = 0;
 };

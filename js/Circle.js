@@ -26,7 +26,7 @@ p.update = function( context )
 {
 	context.globalAlpha = this.alpha;
 	context.beginPath();
-	context.arc( this.x, this.y, this.radius, 0, Math.PI * 2, false );
+	context.arc( this.x, this.y, this.radius * this.scale, 0, Math.PI * 2, false );
 	context.fillStyle = this.color;
 	context.fill();
 };

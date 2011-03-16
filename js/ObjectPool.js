@@ -26,6 +26,15 @@ p.initialise = function( classToPool, max )
 	this.pool = [];
 };
 
+p.release = function( swimmer )
+{
+	var pos = this.pool.indexOf( swimmer )
+	if( pos != -1 )
+	{
+		this.pool.splice( pos, 1 );
+	}
+};
+
 p.request = function()
 {
 	if( this.pool.length < this.max )

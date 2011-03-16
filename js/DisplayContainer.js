@@ -24,15 +24,23 @@ p.initialise = function()
 
 p.update = function( context )
 {
+	var originalAlpha, originalScale, originalX, originalY;
 	for( var i = 0; i < this.children.length; i++ )
 	{
+		originalAlpha = this.children[i].alpha;
+		originalScale = this.children[i].scale;
+		originalX = this.children[i].x;
+		originalY = this.children[i].y;
+
 		this.children[i].alpha *= this.alpha;
+		this.children[i].scale *= this.scale;
 		this.children[i].x += this.x;
 		this.children[i].y += this.y;
 		this.children[i].update( context );
-		this.children[i].alpha /= this.alpha;
-		this.children[i].x -= this.x;
-		this.children[i].y -= this.y;
+		this.children[i].alpha = originalAlpha;
+		this.children[i].scale = originalScale;
+		this.children[i].x = originalX;
+		this.children[i].y = originalY;
 	}
 };
 

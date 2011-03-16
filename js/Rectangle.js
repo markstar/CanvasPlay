@@ -28,7 +28,7 @@ p.update = function( context )
 {
 	context.globalAlpha = this.alpha;
 	context.beginPath();
-	context.rect( this.x, this.y, this.width, this.height );
+	context.rect( this.x, this.y, this.width * this.scale, this.height * this.scale );
 	context.fillStyle = this.color;
 	context.fill();
 };

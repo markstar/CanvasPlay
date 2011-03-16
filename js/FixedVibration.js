@@ -42,8 +42,8 @@ p.run = function()
 {
 	var value = this.target[this.property];
 
-	var goal = this.min + (Math.random() * this.range);
-	this.speed = (this.speed * this.spring) + (goal - value) * this.ease;
+	var goal = this.min + ( Math.random() * this.range );
+	this.speed = ( this.speed * this.spring ) + ( goal - value ) * this.ease;
 
-	this.target[ this.property] = value + this.speed;
+	this.target[ this.property ] = value + this.speed;
 };

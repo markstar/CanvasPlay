@@ -29,4 +29,15 @@ p.update = function()
 p.add = function( behaviour )
 {
 	this.behaviours.push( behaviour );
-}
+};
+
+p.removeAllForTarget = function( target )
+{
+	for( var i = this.behaviours.length - 1; i > -1; i-- )
+	{
+		if( this.behaviours[i].target == target )
+		{
+			this.behaviours.splice( i, 1 );
+		}
+	}
+};
