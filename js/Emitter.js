@@ -4,26 +4,24 @@
  * Time: 08:30
  */
 
-Ballistic = function( target, drag, minForce, maxForce, gravityForce, gravityAngle )
+Emitter = function( target, drag, minScale, maxScale, minForce, maxForce, emitMinAngle, emitMaxAngle, gravityForce, gravityAngle )
 {
-	this.initialise( target, drag, minForce, maxForce, gravityForce, gravityAngle );
+	this.initialise( target, drag, minScale, maxScale, minForce, maxForce, emitMinAngle, emitMaxAngle, gravityForce, gravityAngle );
 };
 
-var p = Ballistic.prototype;
+var p = Emitter.prototype;
 
 p.target = null;
 p.drag = null;
 p.velocity = null;
 p.gravityVelocity = null;
 
-p.initialise = function( target, drag, minForce, maxForce, gravityForce, gravityAngle )
+p.initialise = function( target, drag, minScale, maxScale, minForce, maxForce, emitMinAngle, emitMaxAngle, gravityForce, gravityAngle )
 {
-	//var angle = ( Math.PI / 2 ) * Math.random() - Math.P;
-
-	var angle = ( Math.PI * 1.35 ) + ( Math.PI * 0.3 ) * Math.random();
+	var angle = emitMinAngle + ( emitMaxAngle - emitMinAngle ) * Math.random();
 	var mass = Math.random();
 
-	target.scale = mass * 4;
+	target.scale = mass * ( maxScale - minScale ) + minScale;
 
 	var force = minForce + ( ( 1 - mass ) * ( maxForce - minForce ) );
 
