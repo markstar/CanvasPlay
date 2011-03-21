@@ -46,4 +46,4 @@ p.run = function()
 p.sineWave = function( step )
 {
 	return Math.sin( Math.PI * 2 * step );
-}
+};

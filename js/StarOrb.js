@@ -4,12 +4,12 @@
  * Time: 21:07
  */
 
-Orb = function()
+StarOrb = function()
 {
 	this.initialise();
 };
 
-var p = Orb.prototype = new DisplayContainer();
+var p = StarOrb.prototype = new DisplayContainer();
 
 p._color = null;
 p.DisplayContainer_initialise = p.initialise;
@@ -36,13 +36,17 @@ p.createChildren = function()
 {
 	this.removeChildren();
 
-	var child = new Circle();
-	child.radius = 1;
+	var child = new Star();
+	child.radius = 1.5;
+	child.innerRadius = 0.5;
+	child.numPoints = 5;
 	child.color = this.color;
 	this.addChild( child );
 
-	var child = new Circle();
-	child.radius = 4;
+	var child = new Star();
+	child.radius = 3;
+	child.innerRadius = 1.5;
+	child.numPoints = 5;
 	child.alpha = 0.2;
 	child.color = this.color;
 	this.addChild( child );
