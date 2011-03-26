@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas 10</title>
+
+	<link rel="stylesheet" href="css/styles.css" type="text/css" media="all" />
+
+	<script src="js/CanvasController.js" type="text/javascript"></script>
+	<script src="js/DisplayObject.js" type="text/javascript"></script>
+	<script src="js/DisplayContainer.js" type="text/javascript"></script>
+	<script src="js/Shape.js" type="text/javascript"></script>
+	<script src="js/Circle.js" type="text/javascript"></script>
+	<script src="js/Star.js" type="text/javascript"></script>
+	<script src="js/Rectangle.js" type="text/javascript"></script>
+	<script src="js/Orb.js" type="text/javascript"></script>
+	<script src="js/StarOrb.js" type="text/javascript"></script>
+	<script src="js/Point.js" type="text/javascript"></script>
+	<script src="js/Bounds.js" type="text/javascript"></script>
+	<script src="js/Ticker.js" type="text/javascript"></script>
+	<script src="js/ColorPool.js" type="text/javascript"></script>
+	<script src="js/ObjectPool.js" type="text/javascript"></script>
+	<script src="js/FixedVibration.js" type="text/javascript"></script>
+	<script src="js/Emitter.js" type="text/javascript"></script>
+	<script src="js/VariableVibration.js" type="text/javascript"></script>
+	<script src="js/ExitBoundsTrigger.js" type="text/javascript"></script>
+	<script src="js/BehaviourManager.js" type="text/javascript"></script>
+	<script src="js/TriggerManager.js" type="text/javascript"></script>
+
+	<script>
+		var canvasController = null;
+		var bounds = null;
+		var colorPool = new ColorPool( "#FFFFCC", "#FFFF99", "#FFFF66", "#FFFF33", "#FFFF00" );
+		var objectPool = new ObjectPool( StarOrb, 100 );
+		var orbs = new Array();
+		var behaviours = new BehaviourManager();
+		var triggers = new TriggerManager();
+
+		function init()
+		{
+			objectPool.onCreateObject = onCreateObject;
+
+			canvasController = new CanvasController( document.getElementById( "canvas" ) );
+
+			bounds = new Bounds( 0, 0, canvasController.canvas.width, canvasController.canvas.height );
+
+			var rectangle = new Rectangle();
+			rectangle.width = 800;
+			rectangle.height = 500;
+			rectangle.alpha = 0.05;
+			canvasController.addChild( rectangle );
+
+			canvasController.capture = true;
+			canvasController.update();
+
+			Ticker.add( update );
+			Ticker.start();
+		}
+
+		function onCreateObject( orb )
+		{
+			orb.x = 400;
+			orb.y = 500;
+
+			orb.color = colorPool.getColor();
+
+			// target, drag, minScale, maxScale, minForce, maxForce, emitMinAngle, emitMaxAngle, gravityForce, gravityAngle
+
+			behaviours.add( new Emitter( orb, 0.97, 0.2, 4, 10, 30, 1.35 * Math.PI, 1.65 * Math.PI, 0.25, 90 ) );
+
+			triggers.add( new ExitBoundsTrigger( orb, bounds, onExitBounds ) );
+
+			orbs.push( orb );
+			canvasController.addChild( orb );
+		}
+
+		function onExitBounds( orb )
+		{
+			canvasController.removeChild( orb );
+			objectPool.release( orb );
+			behaviours.removeAllForTarget( orb );
+			triggers.removeAllForTarget( orb );
+		}
+
+		function update()
+		{
+			objectPool.request();
+			behaviours.update();
+			triggers.update();
+			canvasController.update();
+
+			document.getElementById( "objectCount" ).innerHTML = "Object count: " + objectPool.pool.length;
+		}
+
+		function toggleCapture()
+		{
+			canvasController.capture = !canvasController.capture;
+		}
+
+	</script>
+</head>
+
+<body onload="init();">
+
+<canvas id="canvas" width="800" height="500">
+	This demo uses HTML5 features, please upgrade to a modern browser that supports HTML5.
+</canvas>
+
+<br />
+
+<button onclick="toggleCapture()">Toggle Capture</button>
+
+<span id="objectCount">&nbsp;</span>
+
+<p>
+	<a href="http://markstar.co.uk/?p=490">View the blog post about this demo</a>
+</p>
+
+<p>
+	<a href="Canvas_09.html">View previous demo</a>
+</p>
+
+</body>
+</html>
